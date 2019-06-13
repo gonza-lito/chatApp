@@ -8,7 +8,7 @@ import { Wallpaper } from "../../components/wallpaper"
 import { Header } from "../../components/header"
 import { color, spacing } from "../../theme"
 import { bowserLogo } from "./"
-
+import { translate } from "../../i18n/"
 const FULL: ViewStyle = { flex: 1 }
 const CONTAINER: ViewStyle = {
   backgroundColor: color.transparent,

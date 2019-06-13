@@ -23,5 +23,9 @@
   "storybook": {
     "placeholder": "Placeholder",
     "field": "Field"
+  },
+  "loginScreen": {
+    "header":"Login",
+    "loginText": "Please input a nickname"
   }
 }

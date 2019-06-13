@@ -1,10 +1,10 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { ChatStoreModel } from "../../models/chat-store"import { UserStoreModel } from "../../models/user-store"import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { NavigationStoreModel } from "../../navigation/navigation-store"
 
 /**
  * An RootStore model.
  */
-export const RootStoreModel = types.model("RootStore").props({
+export const RootStoreModel  chatStore: types.optional(ChatStoreModel, {}),  userStore: types.optional(UserStoreModel, {}), = types.model("RootStore").props({
   navigationStore: types.optional(NavigationStoreModel, {}),
 })
 

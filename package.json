@@ -43,6 +43,7 @@
     "react-navigation": "3.0.0",
     "reactotron-mst": "^3.1.1",
     "reactotron-react-native": "^3.4.1",
+    "realm": "^3.0.0-beta.1",
     "validate.js": "0.12.0"
   },
   "devDependencies": {

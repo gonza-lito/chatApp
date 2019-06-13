@@ -1,9 +1,10 @@
 import { createStackNavigator } from "react-navigation"
-import { ExampleNavigator } from "./example-navigator"
+
+import { ChatNavigator } from "./chat-navigator";
 
 export const RootNavigator = createStackNavigator(
   {
-    exampleStack: { screen: ExampleNavigator },
+    chatStack: { screen: ChatNavigator },
   },
   {
     headerMode: "none",
