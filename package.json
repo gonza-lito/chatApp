@@ -44,6 +44,7 @@
     "reactotron-mst": "^3.1.1",
     "reactotron-react-native": "^3.4.1",
     "realm": "^3.0.0-beta.1",
+    "uuid": "^3.3.2",
     "validate.js": "0.12.0"
   },
   "devDependencies": {
@@ -54,11 +55,13 @@
     "@storybook/addon-storyshots": "^4.0.6",
     "@storybook/react-native": "3.4.3",
     "@types/jest": "23.3.2",
+    "@types/lodash": "^4.14.134",
     "@types/ramda": "0.25.28",
     "@types/react": "16.7.7",
     "@types/react-native": "0.57.13",
     "@types/react-navigation": "2.13.5",
     "@types/react-test-renderer": "16.0.3",
+    "@types/uuid": "^3.4.4",
     "@typescript-eslint/eslint-plugin": "^1.1.0",
     "@typescript-eslint/parser": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",

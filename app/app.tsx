@@ -59,7 +59,10 @@ export class App extends React.Component<{}, AppState> {
     // otherwise, we're ready to render the app
 
     // --- am: begin list of stores ---
-    const otherStores = {}
+    const otherStores = {
+      userStore: rootStore.userStore,
+      chatStore: rootStore.chatStore,
+    }
     // --- am: end list of stores ---
 
     return (

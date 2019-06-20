@@ -1,19 +1,26 @@
 import * as React from "react"
 import { observer, inject } from "mobx-react"
-import { ViewStyle, View, SafeAreaView, TextStyle, ImageStyle } from "react-native"
+import { ViewStyle, View, SafeAreaView, TextStyle, FlatList } from "react-native"
+
 import { Text } from "../../components/text"
 import { Screen } from "../../components/screen"
 
 import { Button } from "../../components/button"
 
 import { color, spacing } from "../../theme"
-import { NavigationScreenProps } from "react-navigation"
+
 import { Wallpaper } from "../../components/wallpaper"
 import { translate } from "../../i18n/"
 import { Header } from "../../components/header"
 import { TextField } from "../../components/text-field"
 import { UserStore } from "../../models/user-store"
-export interface LoginScreenProps extends NavigationScreenProps<{}> {
+import { NavigationScreenProps } from "react-navigation"
+import { ChatListItem } from "../../components/chatListItem"
+import { ChatStore } from "../../models/chat-store"
+import { Chat } from "../../models/chat"
+
+export interface ChatListScreenProps extends NavigationScreenProps<{}> {
+  chatStore: ChatStore
   userStore: UserStore
 }
 
@@ -40,7 +47,6 @@ const HEADER_TITLE: TextStyle = {
   textAlign: "center",
   letterSpacing: 1.5,
 }
-
 
 const CONTENT: TextStyle = {
   ...TEXT,
@@ -69,52 +75,61 @@ const FOOTER_CONTENT: ViewStyle = {
 const INPUT_STYLE = {
   color: color.palette.black,
 }
-
-// @inject("mobxstuff")
+@inject("chatStore")
 @inject("userStore")
 @observer
-export class LoginScreen extends React.Component<LoginScreenProps, {}> {
-  
-  login = () => {
-    try {
-      this.props.userStore.login(this.state.userName);
-      this.props.navigation.navigate("chatScreen")
-    } catch(err) {
-      console.log(err)
+export class ChatListScreen extends React.Component<ChatListScreenProps, {}> {
+  createRoomAndJoin = () => {
+    console.log("hello", this.state)
+    if (this.state.chatName && this.state.chatName !== "") {
+      this.props.chatStore.createAndSetCurrent(this.state.chatName)
+      this.props.navigation.navigate("roomScreen")
     }
-  }
 
+  }
+  joinRoom(room: any) {
+    return () => {}
+  }
   state = {
-    userName: "",
+    chatName: "",
   }
-
   render() {
     return (
-      <View testID="loginScreen" style={FULL}>
+      <View testID="chatListScreen" style={FULL}>
         <Wallpaper />
         <Screen style={CONTAINER} preset="scroll" backgroundColor={color.transparent}>
-          <Header headerTx="loginScreen.header" style={HEADER} titleStyle={HEADER_TITLE} />
-          <Text style={CONTENT}>{translate("loginScreen.loginText")}</Text>
-          <TextField
-            inputStyle={INPUT_STYLE}
-            onChangeText={value =>
-              this.setState({
-                userName: value,
-              })
-            }
-            value={this.state.userName}
-            label="Name"
-            placeholder="omg your name"
+          <Header headerTx="chatListScreen.header" style={HEADER} titleStyle={HEADER_TITLE} />
+          <Text style={CONTENT}>{translate("chatListScreen.chatList")}</Text>
+          <FlatList
+            data={this.props.chatStore.rooms.slice()}
+            renderItem={({ item }: { item: Chat }) => (
+              <ChatListItem room={item} onTap={this.joinRoom(item)} />
+            )}
+            onRefresh={this.props.chatStore.loadRooms}
+            refreshing={this.props.chatStore.isLoading}
+            keyExtractor={item => item.id.toString()}
+            //  extraData={{ extra: this.props.toDoStore.todos }}
           />
         </Screen>
         <SafeAreaView style={FOOTER}>
           <View style={FOOTER_CONTENT}>
+            <TextField
+              inputStyle={INPUT_STYLE}
+              onChangeText={value =>
+                this.setState({
+                  chatName: value,
+                })
+              }
+              value={this.state.chatName}
+              label="Name"
+              placeholder="omg your name"
+            />
             <Button
-              testID="login-button"
+              testID="create-button"
               style={CONTINUE}
               textStyle={CONTINUE_TEXT}
-              tx="loginScreen.loginButtonText"
-              onPress={this.login}
+              tx="chatListScreen.createButton"
+              onPress={this.createRoomAndJoin}
             />
           </View>
         </SafeAreaView>

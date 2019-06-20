@@ -25,7 +25,17 @@
     "field": "Field"
   },
   "loginScreen": {
-    "header":"Login",
-    "loginText": "Please input a nickname"
+    "header": "Login",
+    "loginText": "Please input a nickname",
+    "loginButtonText": "Log in"
+  },
+  "chatListScreen": {
+    "header": "Pick a room",
+    "chatList": "Rooms",
+    "createButton": "create and join"
+  },
+  "roomScreen": {
+    "header": "Room: ",
+    "sendMessage": "send"
   }
 }
